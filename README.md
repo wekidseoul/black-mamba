@@ -1,7 +1,7 @@
 # blackmamba
 
 - 목표
-Black Mamba 피하기 게임을 구현하며 JavaScript에 익숙해지기
+    - Black Mamba 피하기 게임을 구현하며 JavaScript에 익숙해지기
 
 - 게임 설명
     - 뱀(Black Mamba)이 랜덤한 방향으로 스스로 돌아다닌다.
