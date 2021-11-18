@@ -10,10 +10,9 @@ Black Mamba 피하기 게임을 구현하며 JavaScript에 익숙해지기
     - 일정 시간이 주어지고 시간 안에 모두 모으면 성공.
     
 - commit type
-    
-    feat : 새로운 기능
-    fix : 버그 수정
-    perf : 성능 개선
-    refactor : 코드 리팩토링
-    style : 코드 의미에 영향을 주지 않는 변경사항
-    build : 시스템 또는 외부 종속성에 영향을 미치는 변경사항 (npm 레벨)
+    - feat : 새로운 기능
+    - fix : 버그 수정
+    - perf : 성능 개선
+    - refactor : 코드 리팩토링
+    - style : 코드 의미에 영향을 주지 않는 변경사항
+    - build : 시스템 또는 외부 종속성에 영향을 미치는 변경사항 (npm 레벨)
