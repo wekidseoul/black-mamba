@@ -1,4 +1,5 @@
-# blackmamba
+![image](https://user-images.githubusercontent.com/79843611/142410272-77c16f05-d171-4e5f-a3f1-4a62cfb414fb.png)
+# BLACK MAMBA
 
 - 목표
     - Black Mamba 피하기 게임을 구현하며 JavaScript에 익숙해지기
