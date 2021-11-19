@@ -8,7 +8,7 @@ for (let i=0;i<25;i++){
     }
 }
 
-const snake = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6] ];
+let snake = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8] ];
 
 function makeBoard(){
     const gameboard = document.getElementById("game-board");
@@ -37,11 +37,13 @@ const dx = [0, 1, 0, -1];
 const dy = [1, 0, -1, 0];
 function moveSnake(){
     const snakeHead = snake[snake.length - 1];
+    let count = 0;
     while (true){
+        count+=1;
         const next_dir = Math.floor(Math.random() * 10) % 4;
         console.log(next_dir);
-        nextX = snakeHead[0]+dx[next_dir];
-        nextY = snakeHead[1]+dy[next_dir];
+        const nextX = snakeHead[0]+dx[next_dir];
+        const nextY = snakeHead[1]+dy[next_dir];
         if (0<=nextX && nextX<25 && 0<=nextY && nextY<25){
             if (board[nextX][nextY] !== 1){
                 snake.push([nextX, nextY]);
@@ -52,13 +54,26 @@ function moveSnake(){
                 return;
             }
         }
+        if (count == 10){
+            resetSnake();
+            return;
+        }
     }
+}
+
+function resetSnake(){
+    for (let i = 0; i < snake.length; i++){
+        board[snake[i][0]][snake[i][1]] = 0;
+        const block = document.getElementById(snake[i]);
+        block.style.backgroundColor = "white";
+    }
+    snake = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8] ];
 }
 
 makeBoard();
 drawSnake();
 
-setInterval(moveSnake, 500);
+setInterval(moveSnake, 10);
 
 // 화면에 보여지는 테이블
 // 뒤에서 움직이는 보드
