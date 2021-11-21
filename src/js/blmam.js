@@ -45,7 +45,7 @@ function addSnake(){
     }
     
     let checkEmpty = setInterval(function(){
-        check = true;
+        let check = true;
         for (let i = 0; i<9; i++){
             if (board[24][i] === 1){
                 check = false;
@@ -55,7 +55,7 @@ function addSnake(){
             clearInterval(checkEmpty);
             moveSnake(snake);
         }
-    }, 500);
+    }, 100);
 }
 
 //방향 0:좌, 1:하, 2:우, 3:상
@@ -63,7 +63,7 @@ function moveSnake(snake){
     let now_dir = 0;
     for (let i = 0; i<9; i++){
         document.getElementById(`24,${i}`).style.backgroundColor = "black";
-        board[0][i] = 1;   
+        board[24][i] = 1;   
     }
     
     let forward_rnd = Math.floor(Math.random() * 10) % 3 + 3;
