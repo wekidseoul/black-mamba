@@ -1,4 +1,8 @@
-board = new Array(25);
+// 뱀은 보드에서 움직이고, 뱀이 있는 위치를 테이블에 띄운다.
+// 뱀을 좌표로 기억해야함. (x, y)
+// board에 빈 땅은 0, 뱀은 1, 유저는 2, 보석은 3
+
+const board = new Array(25);
 for (let i = 0; i<25; i++){
     board[i] = new Array(25);
 }
@@ -8,9 +12,15 @@ for (let i=0;i<25;i++){
     }
 }
 
-let snake = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8] ];
+const mamba = document.getElementById("mamba");
+let mambaCount = 0;
 
-function makeBoard(){
+const dx = [0, -1, 0, 1]
+const dy = [1, 0, -1, 0]
+
+const button = document.getElementById("add-snake");
+
+function makeField(){
     const gameboard = document.getElementById("game-board");
     
     for (let i = 0; i<25; i++){
@@ -24,60 +34,112 @@ function makeBoard(){
     }
 }
 
+function addSnake(){
+    mambaCount += 1;
+    mamba.innerText = mambaCount;
+    //처음 3마리, 최대 9마리까지 생성되어야함
+    //새로 만들어지는 뱀이 기존 뱀이 있는 곳에 생기지 않도록 해야함
+    const snake = [];
+    for (let i = 0; i < 9; i++){
+        snake.push([24, i])
+    }
+    
+    let checkEmpty = setInterval(function(){
+        check = true;
+        for (let i = 0; i<9; i++){
+            if (board[24][i] === 1){
+                check = false;
+            }
+        }
+        if (check){
+            clearInterval(checkEmpty);
+            moveSnake(snake);
+        }
+    }, 500);
+}
 
-function drawSnake(){
-    for (let i = 0; i < snake.length; i++){
-        board[snake[i][0]][snake[i][1]] = 1;
-        const block = document.getElementById(snake[i]);
-        block.style.backgroundColor = "black";
+//방향 0:좌, 1:하, 2:우, 3:상
+function moveSnake(snake){
+    let now_dir = 0;
+    for (let i = 0; i<9; i++){
+        document.getElementById(`24,${i}`).style.backgroundColor = "black";
+        board[0][i] = 1;   
+    }
+    
+    let forward_rnd = Math.floor(Math.random() * 10) % 3 + 3;
+    let count = 0;
+    let moving = setInterval(function() {
+        let move = forward(snake, now_dir, count, forward_rnd);
+        snake = move[0];
+        now_dir = move[1];
+        count = move[2];
+        forward_rnd = move[3];
+        if (snake === -1){
+            clearInterval(moving);
+            addSnake();
+        }
+    }, 100);
+}
+
+function forward(snake, now_dir, count, forward_rnd){
+    count = count + 1;
+    if (count === forward_rnd){
+        const nextDir = turn(snake);
+        forward_rnd = Math.floor(Math.random() * 10) % 3 + 3;
+        if (nextDir === -1){
+            return [resetSnake(snake), 0, 0, forward_rnd];
+        }
+        return [snake, nextDir, 0, forward_rnd];
+    }
+    let snakeHead = snake[snake.length - 1];
+    const nextX = snakeHead[0] + dx[now_dir];
+    const nextY = snakeHead[1] + dy[now_dir];
+    if ((nextX>=0 && nextX<25) && (nextY>=0 && nextY<25) && board[nextX][nextY] === 0){
+        snake.push([nextX,nextY]);
+        document.getElementById(`${nextX},${nextY}`).style.backgroundColor = "black";
+        board[nextX][nextY] = 1;
+        const snakeTail = snake.shift();
+        document.getElementById(`${snakeTail[0]},${snakeTail[1]}`).style.backgroundColor = "white";
+        board[snakeTail[0]][snakeTail[1]] = 0;
+        return [snake, now_dir, count, forward_rnd];
+    }else{
+        const nextDir = turn(snake);
+        forward_rnd = Math.floor(Math.random() * 10) % 3 + 3;
+        if (nextDir === -1){
+            return [resetSnake(snake), 0, 0, forward_rnd];
+        }
+        return [snake, nextDir, 0, forward_rnd];
     }
 }
 
-const dx = [0, 1, 0, -1];
-const dy = [1, 0, -1, 0];
-function moveSnake(){
+function turn(snake){
     const snakeHead = snake[snake.length - 1];
     let count = 0;
     while (true){
         count+=1;
         const next_dir = Math.floor(Math.random() * 10) % 4;
-        console.log(next_dir);
         const nextX = snakeHead[0]+dx[next_dir];
         const nextY = snakeHead[1]+dy[next_dir];
         if (0<=nextX && nextX<25 && 0<=nextY && nextY<25){
-            if (board[nextX][nextY] !== 1){
-                snake.push([nextX, nextY]);
-                const snakeTail = snake.shift();
-                document.getElementById(`${snakeTail[0]},${snakeTail[1]}`).style.backgroundColor = "white";
-                board[snakeTail[0]][snakeTail[1]] = 0;
-                drawSnake();
-                return;
+            if (board[nextX][nextY] === 0){
+                return next_dir;
             }
         }
-        if (count == 10){
-            resetSnake();
-            return;
+        if (count == 30){
+            return -1;
         }
     }
 }
 
-function resetSnake(){
-    for (let i = 0; i < snake.length; i++){
+function resetSnake(snake){
+    mambaCount -= 1;
+    mamba.innerText = mambaCount;
+    for (let i = 0; i < 9; i++){
+        document.getElementById(`${snake[i][0]},${snake[i][1]}`).style.backgroundColor = "white";
         board[snake[i][0]][snake[i][1]] = 0;
-        const block = document.getElementById(snake[i]);
-        block.style.backgroundColor = "white";
     }
-    snake = [ [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8] ];
+    return -1;
 }
 
-makeBoard();
-drawSnake();
-
-setInterval(moveSnake, 10);
-
-// 화면에 보여지는 테이블
-// 뒤에서 움직이는 보드
-// 뱀
-// 뱀은 보드에서 움직이고, 뱀이 있는 위치를 테이블에 띄운다.
-// 뱀을 좌표로 기억해야함. (x, y)
-// board에 빈 땅은 0, 뱀은 1, 유저는 2, 보석은 3
+makeField();
+button.addEventListener("click", addSnake);
