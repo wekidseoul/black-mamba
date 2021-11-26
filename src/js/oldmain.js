@@ -1,20 +1,23 @@
 // 뱀은 보드에서 움직이고, 뱀이 있는 위치를 테이블에 띄운다.
 // 뱀을 좌표로 기억해야함. (x, y)
 // board에 빈 땅은 0, 뱀은 1, 유저는 2, 보석은 3
-
+import makeField from "./setting.js";
 let board = null;
+
 
 const user = [0,24];
 
 const dx = [0, -1, 0, 1]
 const dy = [1, 0, -1, 0]
 
-const button = document.getElementById("game-start");
+const gameboard = document.getElementById("game-board");
+const button = document.getElementById("game-control");
 const gameResult = document.getElementById("result");
 
-function makeField(){
-    const gameboard = document.getElementById("game-board");
-    
+const clock = document.getElementById("timer");
+
+
+function makeField(gameboard){
     for (let i = 0; i<25; i++){
         const tr = document.createElement("tr");
         for (let j = 0; j<25; j++){
@@ -35,10 +38,36 @@ function makeBoard(){
             board[i][j] = 0;
         }
     }
-
+    
     board[user[0]][user[1]] = 2;
 }
+function clearField(){
+    console.log("clear field");
+    for (let i = 0; i<25; i++){
+        for (let j = 0; j<25; j++){
+            document.getElementById(`${i},${j}`).style.backgroundColor = "white";
+        }
+    }
+}
+let timeLimit = 3;
+function setTimer(){
+    if (button.innerText === "Game Start"){
+        const timer = setInterval(function(){
+            clock.innerText = timeLimit.toFixed(2);
+            timeLimit -= 0.01;
+            if (timeLimit <= 0){
+                clearInterval(timer);
+                gameResult.innerText = "시간 초과"
+                gameState();
+            }
+            else if (button.innerText === "Game Start"){
+                clearInterval(timer);
+            }
+        }, 10)
+    }
+}
 
+let allSnake = [];
 function addSnake(){
     //새로 만들어지는 뱀이 기존 뱀이 있는 곳에 생기지 않도록 해야함
     const snake = [];
@@ -61,7 +90,6 @@ function addSnake(){
 }
 
 //방향 0:좌, 1:하, 2:우, 3:상
-const allSnake = [];
 function moveSnake(snake){
     let now_dir = 0;
     for (let i = 0; i<9; i++){
@@ -93,10 +121,8 @@ function forward(snake, now_dir, count, forward_rnd){
     
     if ((nextX>=0 && nextX<25) && (nextY>=0 && nextY<25) && board[nextX][nextY] === 2){
         gameResult.innerText = "블랙맘바에게 잡아먹혔습니다.";
-        removeAllSnake();
         gameState();
     }
-
     if (count === forward_rnd){
         const nextDir = turn(snake);
         forward_rnd = Math.floor(Math.random() * 10) % 3 + 3;
@@ -149,71 +175,27 @@ function resetSnake(snake){
     }
     return -1;
 }
-/*
-function userLeft(){
-    const nextX = user[0];
-    const nextY = user[1]-1;
-    if (checkMovable(nextX, nextY)){
-        document.getElementById(`${user[0]},${user[1]}`).style.backgroundColor = "white";
-        user[1] -= 1;
-        document.getElementById(`${user[0]},${user[1]}`).style.backgroundColor = "gray";
-    }
-}
-function userRight(){
-    const nextX = user[0];
-    const nextY = user[1]+1;
-    if (checkMovable(nextX, nextY)){
-        document.getElementById(`${user[0]},${user[1]}`).style.backgroundColor = "white";
-        user[1] += 1;
-        document.getElementById(`${user[0]},${user[1]}`).style.backgroundColor = "gray";
-    }
-}
-function userUp(){
-    const nextX = user[0]-1;
-    const nextY = user[1];
-    if (checkMovable(nextX, nextY)){
-        document.getElementById(`${user[0]},${user[1]}`).style.backgroundColor = "white";
-        user[0] -= 1;
-        document.getElementById(`${user[0]},${user[1]}`).style.backgroundColor = "gray";
-    }
-}
-function userDown(){
-    const nextX = user[0]+1;
-    const nextY = user[1];     
-    if (checkMovable(nextX, nextY)){
-        document.getElementById(`${user[0]},${user[1]}`).style.backgroundColor = "white";
-        user[0] += 1;
-        document.getElementById(`${user[0]},${user[1]}`).style.backgroundColor = "gray";
-    }                                                                                                                     
-}
-*/
+
 function userMove(x, y){
     const nextX = user[0] + x;
     const nextY = user[1] + y;
     const check = checkMovable(nextX, nextY);
-    if (check === 0){
-        document.getElementById(`${user[0]},${user[1]}`).style.backgroundColor = "white";
-        board[user[0]][user[1]] = 0;
-        user[0] += x;
-        user[1] += y;
-        document.getElementById(`${user[0]},${user[1]}`).style.backgroundColor = "gray";
-        board[user[0]][user[1]] = 2;
-    }
-    else if (check === 1){
+    if (check === 1){
         //game over
         gameResult.innerText = "블랙맘바에게 잡아먹혔습니다.";
         gameState();
     }
-    else if (check === 3){
-        //보석 습득
+    else if (check !== -1){
         document.getElementById(`${user[0]},${user[1]}`).style.backgroundColor = "white";
         board[user[0]][user[1]] = 0;
         user[0] += x;
         user[1] += y;
         document.getElementById(`${user[0]},${user[1]}`).style.backgroundColor = "gray";
         board[user[0]][user[1]] = 2;
-        addSnake();
-        regenCrystal();
+        if (check === 3){
+            addSnake();
+            regenCrystal();
+        }
     }
 }
 function checkMovable(X, Y){
@@ -255,8 +237,8 @@ const crystalColor = ["red", "orange", "yellow", "green", "blue", "navy", "purpl
 let nowColor = 0;
 function regenCrystal(){
     if (nowColor === 7){
-        removeAllSnake();
-        return win();
+        win();
+        return;
     }
     while (true){
         let crystalX = Math.floor(Math.random() * 100) % 25;
@@ -271,46 +253,46 @@ function regenCrystal(){
 }
 
 function win(){
-    gameResult.innerText = "Game Clear!!";
+    gameResult.innerText = `${(30 - timeLimit).toFixed(2)}초만에 성공하셨습니다.`;
     gameState();
-}
-
-function clearField(){
-    for (let i = 0; i<25; i++){
-        for (let j = 0; j<25; j++){
-            document.getElementById(`${i},${j}`).style.backgroundColor = "white";
-        }
-    }
 }
 
 function removeAllSnake(){
     for (let i = 0; i<allSnake.length; i++){
         clearInterval(allSnake[i]);
+        console.log(i);
     }
+    makeBoard();
+    clearField();
 }
+
+
 
 function initialization(){ //뱀 모두 제거, 유저 초기화, 보석 초기화
     removeAllSnake();
+    setTimer();
     nowColor = 0;
     user[0] = 0;
     user[1] = 24;
-    document.removeEventListener("keydown", keyEvent);
-    makeBoard();
-    clearField();
+    allSnake = [];
+    document.removeEventListener("keydown", keyEvent); 
     button.innerText = "Game Start";
+    timeLimit = 30;
+    clock.innerText = timeLimit.toFixed(2);
 }
 
 function gameStart(){
-    button.innerText = "Reset";
-    gameResult.innerText = "";
+    setTimer();
     makeBoard();
     addSnake();
     userSetting();
     regenCrystal();
+    button.innerText = "Reset";
+    gameResult.innerText = "";
 }
 
 function gameState(){
-    if (this.innerText === "Game Start"){
+    if (button.innerText === "Game Start"){
         gameStart();
     }
     else{
@@ -318,36 +300,11 @@ function gameState(){
     }
 }
 
-makeField();
+makeField(gameboard);
 button.addEventListener("click", gameState);
 
-
-
 /*
-
-오프닝 (필드, 보드 생성 후 텍스트 및 필드 애니메이션)
-게임 시작 버튼, 타이머 등장
-시작을 누르면 뱀 한마리와 유저, 보석 1개 등장
-뱀은 자동으로 움직이고 유저는 방향키로 조종
-유저가 보석을 습득하면 뱀이 한마리 증가
-뱀에 닿으면 패배
-실패시 재시작 버튼만 등장
-
-*/
-
-
-/*
-문제점
-잡혔을 때 뱀이 사라지지 않은 현상
-뱀의 흔적이 한 칸 남는 현상
-
-
-남은거
-
-오프닝, 엔딩
-
-타이머 추가
-시간안에 보석을 못 모으면 패배
-
-승리시 엔딩 후 클리어 시간
+버그
+게임이 끝났을 때 뱀이 사라지지 않고 남아있는 현상
+함수 실행 순서가 중요
 */

@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/be-kid/blackmamba/issues"
   },
-  "homepage": "https://github.com/be-kid/blackmamba#readme"
+  "homepage": "https://github.com/be-kid/blackmamba#readme",
+  "eslintConfig": {
+    "extends": "react-app"
+  }
 }
