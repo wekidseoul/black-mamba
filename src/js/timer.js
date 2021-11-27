@@ -3,11 +3,8 @@ export function setTimer(gameState, timeLimit, clock){
         clock.innerText = timeLimit.toFixed(2);
         timeLimit -= 0.01;
         if (timeLimit < 0){
-            clock.innerText = 0.00;
             clearInterval(timer);
-        }
-        else if (!gameState){
-            clearInterval(timer);
+            clock.innerText = "0.00";
         }
     }, 10)
 

@@ -110,6 +110,10 @@ function drawField(){
             clearInterval(draw);
             resetField();
         }
+        else if (clock.innerText === "0.00"){
+            game();
+            ending(0);
+        }
     }, 10);
 }
 
