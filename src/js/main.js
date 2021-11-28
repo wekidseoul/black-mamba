@@ -19,7 +19,7 @@
 import { setTimer } from "./timer.js";
 import { makeField, resetField, setBoard, resetBoard, makeArrowKeys, setHTML } from "./setting.js";
 import { makeSnake } from "./snake.js";
-import { opening } from "./opening.js";
+import { opening, opening1, opening2, opening3, opening4 } from "./opening.js";
 import { ending } from "./ending.js";
 
 //html 가져오기
@@ -256,7 +256,6 @@ function userSetting(){
     board[user[0]][user[1]] = 2;
 }
 function keyEvent(e){
-    console.log(e.target.id);
     let x = 0;
     let y = 0;
     if (e.key === "ArrowLeft" || e.target.id === "arrow3"){
@@ -312,14 +311,22 @@ function initialization(){
 }
 
 
+let open = true;
 
 makeField(gameBoard);
-opening();
-initialization();
+setTimeout(opening, 300);
+setTimeout(opening1, 500);
+setTimeout(opening2, 700);
+setTimeout(opening3, 900);
+setTimeout(opening4, 1500);
+
+setTimeout(function(){
+    initialization();
+}, 5000);
+
+
 gameControlButton.addEventListener("click", game);
 makeArrowKeys(arrowKeys);
-
-
 const upBtn = document.getElementById("arrow1");
 const downBtn = document.getElementById("arrow7");
 const leftBtn = document.getElementById("arrow3");
