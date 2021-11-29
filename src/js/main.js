@@ -17,21 +17,25 @@
     - 엔딩 : 필드 → 성공 엔딩 → 결과, 버튼
 */
 import { setTimer } from "./timer.js";
-import { makeField, resetField, setBoard, resetBoard, makeArrowKeys, setHTML } from "./setting.js";
+import { makeField, resetField, setBoard, resetBoard, makeArrowKeys, setHTML, makeCrystalList } from "./setting.js";
 import { makeSnake } from "./snake.js";
-import { opening, opening1, opening2, opening3, opening4 } from "./opening.js";
+import { opening, opening1, opening2, opening3, opening4, opening5 } from "./opening.js";
 import { ending } from "./ending.js";
 
 //html 가져오기
 const gameTitle = document.getElementById("game-title");
-gameTitle.innerText = "BLACK MAMBA";
+gameTitle.innerText = " ";
 gameTitle.style.visibility = "hidden";
 
 const gameControlButton = document.getElementById("game-control");
 const button = document.createElement("button");
+button.id = "button";
 button.innerText = "START";
 gameControlButton.appendChild(button);
 gameControlButton.style.visibility = "hidden";
+
+const crystalList = document.getElementById("crystal");
+crystalList.style.visibility = "hidden";
 
 const clock = document.getElementById("timer");
 clock.innerText = "30.00";
@@ -122,7 +126,7 @@ function addSnake(snake){
     let checkEmpty = setInterval(function(){
         let check = true;
         for (let i = 0; i<9; i++){
-            if (board[24][i] === 1){
+            if (board[24][i] !== 0){
                 check = false;
             }
         }
@@ -276,6 +280,7 @@ function regenCrystal(){
         win();
         return;
     }
+    document.getElementById(`color${crystalIdx}`).style.backgroundColor = crystalColor[crystalIdx];
     while (true){
         let crystalX = Math.floor(Math.random() * 100) % 25;
         let crystalY = Math.floor(Math.random() * 100) % 25;
@@ -287,8 +292,11 @@ function regenCrystal(){
 }
 
 function win(){
+    gameState = false;
     clearInterval(timerState);
     killAllsnake();
+    resetBoard(board);
+    resetField();
     document.removeEventListener("keydown", keyEvent);
     button.innerText = "RESTART";
     arrowKeys.style.visibility = "hidden";
@@ -307,18 +315,17 @@ function initialization(){
     timeLimit = 30;
     resetBoard(board);
     resetField();
-    setHTML(gameTitle, clock, button, gameControlButton);
+    setHTML(gameTitle, clock, button, gameControlButton, crystalList);
 }
 
-
-let open = true;
-
 makeField(gameBoard);
-setTimeout(opening, 300);
+makeCrystalList(crystalList);
+opening();
 setTimeout(opening1, 500);
 setTimeout(opening2, 700);
 setTimeout(opening3, 900);
-setTimeout(opening4, 1500);
+setTimeout(opening4, 1100);
+setTimeout(opening5, 1500)
 
 setTimeout(function(){
     initialization();

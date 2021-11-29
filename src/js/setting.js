@@ -19,6 +19,23 @@ export function makeField(gameBoard){
     gameBoard.appendChild(table);
 }
 
+export function makeCrystalList(crystalList){
+    const table = document.createElement("table");
+    table.style.width = "140px";
+    table.style.height = "20px";
+
+    const tr = document.createElement("tr");
+    for (let i=0; i<7; i++){
+        const td = document.createElement("td");
+        td.id = `color${i}`;
+        tr.appendChild(td);
+    }
+    table.appendChild(tr);
+    crystalList.appendChild(table);
+
+    console.log(crystalList);
+}
+
 export function resetField(){
     for (let i = 0; i<25; i++){
         for (let j = 0; j<25; j++){
@@ -75,10 +92,16 @@ export function makeArrowKeys(arrowKeys){
     document.getElementById("arrow7").innerText = "⬇";
 }
 
-export function setHTML(gameTitle, clock, button, gameControlButton){
+export function setHTML(gameTitle, clock, button, gameControlButton, crystalList){
+    gameTitle.innerText = "BLACK MAMBA";
     gameTitle.style.visibility = "visible";
     clock.style.visibility = "visible";
     clock.innerText = "30.00";
     button.style.visibility = "visible";
     gameControlButton.style.visibility = "visible";
+    crystalList.style.visibility = "visible";
+
+    for (let i = 0; i < 7; i++){
+        document.getElementById(`color${i}`).style.backgroundColor = "dimGray";
+    }
 }

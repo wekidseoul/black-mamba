@@ -1,6 +1,13 @@
 import { setBoard } from "./setting.js";
 
 export function opening(){
+    const gameTitle = document.getElementById("game-title");
+
+    gameTitle.innerText = "널 유혹해 삼킨 건";
+    gameTitle.style.visibility = "visible";
+}
+
+export function opening1(){
     const w = "rgb(255,255,255)";
     const b = "rgb(0,0,0)";
     const r = "rgb(255,0,0)";
@@ -42,7 +49,7 @@ export function opening(){
     }
 }
 
-export function opening1(){
+export function opening2(){
     const w = "rgb(255,255,255)";
     const b = "rgb(0,0,0)";
     const r = "rgb(255,0,0)";
@@ -83,7 +90,7 @@ export function opening1(){
     }
 }
 
-export function opening2(){
+export function opening3(){
     const w = "rgb(255,255,255)";
     const b = "rgb(0,0,0)";
     const r = "rgb(255,0,0)";
@@ -124,7 +131,7 @@ export function opening2(){
     }
 }
 
-export function opening3(){
+export function opening4(){
     const w = "rgb(255,255,255)";
     const b = "rgb(0,0,0)";
     const r = "rgb(255,0,0)";
@@ -165,7 +172,7 @@ export function opening3(){
     }
 }
 
-export function opening4(){
+export function opening5(){
     let board = setBoard();
     for (let i = 0; i < 25; i++){
         for (let j = 0; j < 25; j++){
