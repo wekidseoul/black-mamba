@@ -2,22 +2,16 @@ import { opening, opening1, opening2, opening3, opening4, opening5 } from "./ope
 
 export function ending(state){
     const gameTitle = document.getElementById("game-title");
-    gameTitle.style.visibility = "visible";
-
-    const button = document.getElementById("button");
-    button.style.visibility = "hidden";
 
     const crystal = document.getElementById("crystal");
     crystal.style.visibility = "hidden";
 
     
     if (state === 0){ //실패
-        const clock = document.getElementById("timer");
-        clock.style.visibility = "hidden";
-
         const endingStr = ["모", "든 걸", " 삼", "켜버릴"];
         let idx = 0;
-        let str = " ";
+        let str = "";
+        gameTitle.innerText = str;
         let makeTitle = setInterval(function(){
             if (idx === 4){
                 clearInterval(makeTitle);
@@ -30,15 +24,10 @@ export function ending(state){
             }
         }, 200)
 
-        opening5();
-        setTimeout(opening4, 1500);
-        setTimeout(opening3, 2100);
-        setTimeout(opening2, 2600);
-        setTimeout(function(){
-            button.style.visibility = "visible";
-            clock.style.visibility = "visible";
-            crystal.style.visibility = "visible";
-        },3000);
+        setTimeout(opening4, 500);
+        setTimeout(opening3, 1500);
+        setTimeout(opening2, 2500);
+        setTimeout(opening5, 3500);
     }
     else if (state === 1){ //성공
         gameTitle.innerText = "Monochrome to colors";
@@ -68,10 +57,5 @@ export function ending(state){
                 idx+=1;
             }
         },1);
-        
-        setTimeout(function(){
-            button.style.visibility = "visible";
-        },3000);
-
     }
 }

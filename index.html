@@ -3,38 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="src/css/style.css">
     <title>Black Mamba</title>
 </head>
 <body>
-    <h2 id="game-title">
+    <header>
+        <h2 id="game-title" class="gameTitle"></h2>
+        <span id="timer" class="timer"></span>
+    </header>
+
+
+    <main>
+        <span id="game-control" class="gameControl"></span>
+
+        <ul id="crystal" class="crystal">
+            <li class="colorTable" id="color0"></li>
+            <li class="colorTable" id="color1"></li>
+            <li class="colorTable" id="color2"></li>
+            <li class="colorTable" id="color3"></li>
+            <li class="colorTable" id="color4"></li>
+            <li class="colorTable" id="color5"></li>
+            <li class="colorTable" id="color6"></li>
+        </ul>
+
+        <div id="game-board" class="gameBoard"></div>
         
-    </h2>
-    <div id="top">
-        <span id="game-control">
-        
-        </span>
+        <div id="arrow-keys" class="arrowKeys">
+            <button class="arrowKey" id="arrow1">⬆</button>
+            <button class="arrowKey" id="arrow3">⬅</button>
+            <button class="arrowKey" id="arrow5">➡</button>
+            <button class="arrowKey" id="arrow7">⬇</button>
+        </div>
+    </main>
 
-        <span id="crystal">
-
-        </span>
-
-    </div>
-    <br>
-    <span id="timer">
-    
-    </span>
-    <br>
-    <div id="game-board">
-        
-    </div>
-    
-    <br>
-
-    <div id="arrow-keys">
-
-    </div>
     
     
     <script src="src/js/main.js" type="module"></script>

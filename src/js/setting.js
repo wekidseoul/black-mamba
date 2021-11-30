@@ -20,20 +20,7 @@ export function makeField(gameBoard){
     gameBoard.appendChild(table);
 }
 
-export function makeCrystalList(crystalList){
-    const table = document.createElement("table");
 
-    const tr = document.createElement("tr");
-    for (let i=0; i<7; i++){
-        const td = document.createElement("td");
-        td.id = `color${i}`;
-        td.className = "colorTable";
-        tr.appendChild(td);
-    }
-    table.appendChild(tr);
-    table.id = "crystal-table";
-    crystalList.appendChild(table);
-}
 
 export function resetField(){
     for (let i = 0; i<25; i++){
@@ -64,44 +51,12 @@ export function resetBoard(board){
     }
 }
 
-export function makeArrowKeys(arrowKeys){
-    let idx = 0;
-    const table = document.createElement("table");
-    for (let i = 0; i<3; i++){
-        const tr = document.createElement("tr");
-        for (let j = 0; j<3; j++){
-            const td = document.createElement("td");
-            if ((i+j) % 2 === 1){
-                const arrowButton = document.createElement("button");
-                arrowButton.style.width = "80px";
-                arrowButton.style.height = "80px";
-                arrowButton.id = `arrow${idx}`;
-                td.appendChild(arrowButton);
-            }
-            tr.appendChild(td);
-            idx+=1;
-        }
-        table.appendChild(tr);
-    }
-    table.id = "arrowTable";
-    arrowKeys.appendChild(table);
 
-    document.getElementById("arrow1").innerText = "⬆";
-    document.getElementById("arrow3").innerText = "⬅";
-    document.getElementById("arrow5").innerText = "➡";
-    document.getElementById("arrow7").innerText = "⬇";
-}
 
-export function setHTML(gameTitle, clock, button, gameControlButton, crystalList){
-    gameTitle.innerText = "BLACK MAMBA";
-    gameTitle.style.visibility = "visible";
-    clock.style.visibility = "visible";
-    clock.innerText = "30.00";
-    button.style.visibility = "visible";
-    gameControlButton.style.visibility = "visible";
-    crystalList.style.visibility = "visible";
-
-    for (let i = 0; i < 7; i++){
-        document.getElementById(`color${i}`).style.backgroundColor = "dimGray";
-    }
+export function setHTML(gameTitle, clock, timeLimit){
+    //gameTitle.innerText = " ";
+    clock.innerText = timeLimit.toFixed(2);
+    document.querySelectorAll('.colorTable').forEach(crystal => {
+        crystal.style.backgroundColor = 'dimgray';
+    })
 }

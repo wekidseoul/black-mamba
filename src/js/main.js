@@ -17,35 +17,21 @@
     - 엔딩 : 필드 → 성공 엔딩 → 결과, 버튼
 */
 import { setTimer } from "./timer.js";
-import { makeField, resetField, setBoard, resetBoard, makeArrowKeys, setHTML, makeCrystalList } from "./setting.js";
+import { makeField, resetField, setBoard, resetBoard, setHTML} from "./setting.js";
 import { makeSnake } from "./snake.js";
 import { opening, opening1, opening2, opening3, opening4, opening5 } from "./opening.js";
 import { ending } from "./ending.js";
 
 //html 가져오기
 const gameTitle = document.getElementById("game-title");
-gameTitle.innerText = " ";
-gameTitle.style.visibility = "hidden";
-
-const gameControlButton = document.getElementById("game-control");
-const button = document.createElement("button");
-button.id = "button";
-button.innerText = "START";
-gameControlButton.appendChild(button);
-gameControlButton.style.visibility = "hidden";
-
-const crystalList = document.getElementById("crystal");
-crystalList.style.visibility = "hidden";
+//gameTitle.innerText = " ";
 
 const clock = document.getElementById("timer");
 clock.innerText = "30.00";
-clock.style.visibility = "hidden";
+const crystal = document.getElementById("crystal");
 
 const gameBoard = document.getElementById("game-board");
-
 const arrowKeys = document.getElementById("arrow-keys");
-arrowKeys.style.width = "300px";
-arrowKeys.style.height = "300px";
 arrowKeys.style.visibility = "hidden";
 
 
@@ -69,15 +55,14 @@ function game(){
     if (gameState){ //종료
         gameState = false;
         clearInterval(timerState);
-        button.innerText = "START";
         arrowKeys.style.visibility = "hidden";
         document.removeEventListener("keydown", keyEvent);
+        gameTitle.style.display = "block";
+        clock.style.display = "none";
+        setTimeout(game, 5000);
     }
     else{   //시작
         gameState = true;
-        timerState = setTimer(gameState, timeLimit, clock);
-        button.innerText = "RESET";
-        arrowKeys.style.visibility = "visible";
         gameStart();
     }
 }
@@ -89,7 +74,11 @@ function gameStart(){
     userSetting();
     regenCrystal();
     drawField();
-
+    timerState = setTimer(gameState, timeLimit, clock);
+    crystal.style.visibility = "visible"; 
+    arrowKeys.style.visibility = "visible";
+    clock.style.display = "block";
+    gameTitle.style.display = "none";
 }
 
 function drawField(){
@@ -298,9 +287,11 @@ function win(){
     resetBoard(board);
     resetField();
     document.removeEventListener("keydown", keyEvent);
-    button.innerText = "RESTART";
     arrowKeys.style.visibility = "hidden";
     ending(1);
+    gameTitle.style.display = "block";
+    clock.style.display = "none";
+    setTimeout(game,5000);
 }
 
 
@@ -315,25 +306,22 @@ function initialization(){
     timeLimit = 30;
     resetBoard(board);
     resetField();
-    setHTML(gameTitle, clock, button, gameControlButton, crystalList);
+    setHTML(gameTitle, clock, timeLimit);
 }
 
 makeField(gameBoard);
-makeCrystalList(crystalList);
 opening();
 setTimeout(opening1, 500);
-setTimeout(opening2, 700);
-setTimeout(opening3, 900);
-setTimeout(opening4, 1100);
-setTimeout(opening5, 1500)
+setTimeout(opening2, 1000);
+setTimeout(opening3, 1500);
+setTimeout(opening4, 2000);
+setTimeout(opening5, 2500)
 
 setTimeout(function(){
     initialization();
-}, 5000);
+    game();
+}, 4000);
 
-
-gameControlButton.addEventListener("click", game);
-makeArrowKeys(arrowKeys);
 const upBtn = document.getElementById("arrow1");
 const downBtn = document.getElementById("arrow7");
 const leftBtn = document.getElementById("arrow3");
@@ -342,3 +330,5 @@ upBtn.addEventListener("click", keyEvent);
 downBtn.addEventListener("click", keyEvent);
 leftBtn.addEventListener("click", keyEvent);
 rightBtn.addEventListener("click", keyEvent);
+
+//setTimeout(game, 5000);
