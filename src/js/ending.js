@@ -15,7 +15,21 @@ export function ending(state){
         const clock = document.getElementById("timer");
         clock.style.visibility = "hidden";
 
-        gameTitle.innerText = "모든 걸 삼켜버릴";
+        const endingStr = ["모", "든 걸", " 삼", "켜버릴"];
+        let idx = 0;
+        let str = " ";
+        let makeTitle = setInterval(function(){
+            if (idx === 4){
+                clearInterval(makeTitle);
+            }
+            else
+            {
+                str += endingStr[idx];
+                gameTitle.innerText = str;
+                idx+=1;
+            }
+        }, 200)
+
         opening5();
         setTimeout(opening4, 1500);
         setTimeout(opening3, 2100);

@@ -28,12 +28,12 @@ export function makeCrystalList(crystalList){
     for (let i=0; i<7; i++){
         const td = document.createElement("td");
         td.id = `color${i}`;
+        td.className = "colorTable";
         tr.appendChild(td);
     }
     table.appendChild(tr);
+    table.id = "crystal-table";
     crystalList.appendChild(table);
-
-    console.log(crystalList);
 }
 
 export function resetField(){

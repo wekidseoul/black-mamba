@@ -1,0 +1,39 @@
+body{
+    width: 500px;
+    margin: 0 auto;
+    background-color: black;
+
+}
+
+#game-title, #timer {
+    color: white;
+}
+
+h2 {
+    text-align: center;
+}
+
+
+#game-control {
+    margin-right: 88px;
+    margin-left: 15px;
+}
+
+#crystal {
+    width: 140px;
+    height: 20px;
+}
+#crystal-table {
+    display: inline;
+    margin-right: 100px;
+    width: 140px;
+    height: 20px;
+}
+.colorTable {
+    width: 20px;
+    height: 20px;
+}
+
+#arrow-keys{
+    margin: auto;
+}

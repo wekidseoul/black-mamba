@@ -3,7 +3,20 @@ import { setBoard } from "./setting.js";
 export function opening(){
     const gameTitle = document.getElementById("game-title");
 
-    gameTitle.innerText = "널 유혹해 삼킨 건";
+    const openingStr = ["널", " 유혹해", " 삼킨", " 건"];
+    let idx = 0;
+    let str = " ";
+    let makeTitle = setInterval(function(){
+        if (idx === 4){
+            clearInterval(makeTitle);
+        }
+        else
+        {
+            str += openingStr[idx];
+            gameTitle.innerText = str;
+            idx+=1;
+        }
+    }, 200)
     gameTitle.style.visibility = "visible";
 }
 
