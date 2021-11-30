@@ -24,7 +24,6 @@ import { ending } from "./ending.js";
 
 //html 가져오기
 const gameTitle = document.getElementById("game-title");
-//gameTitle.innerText = " ";
 
 const clock = document.getElementById("timer");
 clock.innerText = "30.00";
@@ -306,7 +305,7 @@ function initialization(){
     timeLimit = 30;
     resetBoard(board);
     resetField();
-    setHTML(gameTitle, clock, timeLimit);
+    setHTML(clock, timeLimit);
 }
 
 makeField(gameBoard);
@@ -330,5 +329,3 @@ upBtn.addEventListener("click", keyEvent);
 downBtn.addEventListener("click", keyEvent);
 leftBtn.addEventListener("click", keyEvent);
 rightBtn.addEventListener("click", keyEvent);
-
-//setTimeout(game, 5000);

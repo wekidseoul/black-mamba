@@ -33,10 +33,6 @@ main {
     justify-content: space-around;
 }
 
-.gameControl {
-    display: none;
-}
-
 .crystal {
     display: flex;
     visibility: hidden;

@@ -10,7 +10,7 @@ export function ending(state){
     if (state === 0){ //실패
         const endingStr = ["모", "든 걸", " 삼", "켜버릴"];
         let idx = 0;
-        let str = "";
+        let str = " ";
         gameTitle.innerText = str;
         let makeTitle = setInterval(function(){
             if (idx === 4){
@@ -30,8 +30,21 @@ export function ending(state){
         setTimeout(opening5, 3500);
     }
     else if (state === 1){ //성공
-        gameTitle.innerText = "Monochrome to colors";
-        
+        const winEnding = ["Mono", "chrome", " to", " colors"];
+        let winIdx = 0;
+        let str = " ";
+        gameTitle.innerText = str;
+        let makeTitle = setInterval(function(){
+            if (winIdx === 4){
+                clearInterval(makeTitle);
+            }
+            else
+            {
+                str += winEnding[winIdx];
+                gameTitle.innerText = str;
+                winIdx+=1;
+            }
+        }, 200)
         const colors = [];
    
         for (let i=0; i<25; i++){

@@ -3,8 +3,6 @@ export function makeField(gameBoard){
     table.style.border = "solid";
     table.style.color = "darkgray"
     table.style.borderCollapse = "collapse";
-    //table.style.width = "500px";
-    //table.style.height = "500px";
     
     for (let i = 0; i<25; i++){
         const tr = document.createElement("tr");
@@ -53,8 +51,7 @@ export function resetBoard(board){
 
 
 
-export function setHTML(gameTitle, clock, timeLimit){
-    //gameTitle.innerText = " ";
+export function setHTML(clock, timeLimit){
     clock.innerText = timeLimit.toFixed(2);
     document.querySelectorAll('.colorTable').forEach(crystal => {
         crystal.style.backgroundColor = 'dimgray';
