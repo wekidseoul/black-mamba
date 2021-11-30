@@ -3,8 +3,8 @@ export function makeField(gameBoard){
     table.style.border = "solid";
     table.style.color = "darkgray"
     table.style.borderCollapse = "collapse";
-    table.style.width = "500px";
-    table.style.height = "500px";
+    //table.style.width = "500px";
+    //table.style.height = "500px";
     
     for (let i = 0; i<25; i++){
         const tr = document.createElement("tr");
@@ -16,13 +16,12 @@ export function makeField(gameBoard){
         }
         table.appendChild(tr);
     }
+    table.id = "field";
     gameBoard.appendChild(table);
 }
 
 export function makeCrystalList(crystalList){
     const table = document.createElement("table");
-    table.style.width = "140px";
-    table.style.height = "20px";
 
     const tr = document.createElement("tr");
     for (let i=0; i<7; i++){
@@ -74,8 +73,8 @@ export function makeArrowKeys(arrowKeys){
             const td = document.createElement("td");
             if ((i+j) % 2 === 1){
                 const arrowButton = document.createElement("button");
-                arrowButton.style.width = "100px";
-                arrowButton.style.height = "100px";
+                arrowButton.style.width = "80px";
+                arrowButton.style.height = "80px";
                 arrowButton.id = `arrow${idx}`;
                 td.appendChild(arrowButton);
             }
@@ -84,6 +83,7 @@ export function makeArrowKeys(arrowKeys){
         }
         table.appendChild(tr);
     }
+    table.id = "arrowTable";
     arrowKeys.appendChild(table);
 
     document.getElementById("arrow1").innerText = "⬆";

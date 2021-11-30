@@ -1,8 +1,12 @@
 body{
-    width: 500px;
     margin: 0 auto;
     background-color: black;
+    text-align: center;
+}
 
+#field {
+    width: 100%;
+    height: 500px;
 }
 
 #game-title, #timer {
@@ -13,21 +17,25 @@ h2 {
     text-align: center;
 }
 
-
-#game-control {
-    margin-right: 88px;
-    margin-left: 15px;
+#top {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
 }
 
-#crystal {
-    width: 140px;
-    height: 20px;
+#timer {
+    text-align: center;
 }
+
+#arrowTable {
+    margin: 0 auto;
+}
+
+
 #crystal-table {
     display: inline;
-    margin-right: 100px;
-    width: 140px;
-    height: 20px;
+    margin-left: 9%;
+    margin-right: 20%;
 }
 .colorTable {
     width: 20px;
@@ -36,4 +44,5 @@ h2 {
 
 #arrow-keys{
     margin: auto;
+    text-align: center;
 }
