@@ -322,5 +322,8 @@ leftBtn.addEventListener("click", keyEvent);
 rightBtn.addEventListener("click", keyEvent);
 
 document.addEventListener('dblclick', (e) => {
-    e.preventDefault();
-});
+    e = e.originalEvent || e;
+    if(e.scale > 1){
+        e.preventDefault();
+    }
+}, false);
