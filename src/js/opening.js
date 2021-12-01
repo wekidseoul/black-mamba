@@ -3,11 +3,12 @@ import { setBoard } from "./setting.js";
 export function opening(){
     const gameTitle = document.getElementById("game-title");
 
-    const openingStr = ["널", " 유혹해", " 삼킨", " 건"];
+    const openingStr = [" 유혹해", " 삼킨", " 건"];
     let idx = 0;
-    let str = " ";
+    let str = "널";
+    gameTitle.innerText = str;
     let makeTitle = setInterval(function(){
-        if (idx === 4){
+        if (idx === 3){
             clearInterval(makeTitle);
         }
         else
@@ -16,8 +17,7 @@ export function opening(){
             gameTitle.innerText = str;
             idx+=1;
         }
-    }, 200)
-    gameTitle.style.visibility = "visible";
+    }, 200);
 }
 
 export function opening1(){
@@ -186,12 +186,10 @@ export function opening4(){
 }
 
 export function opening5(){
-    let board = setBoard();
-    for (let i = 0; i < 25; i++){
-        for (let j = 0; j < 25; j++){
-            document.getElementById(`${i},${j}`).style.backgroundColor = "white";
-        }
-    }
+
+    document.querySelectorAll('.piece').forEach(p=>{
+        p.style.backgroundColor = "white";
+    })
     
     const blackmamba = [[7,3],[7,4],[7,7],[7,12],[7,15],[7,16],[7,17],[7,19],[7,21],
                         [8,3],[8,5],[8,7],[8,11],[8,13],[8,15],[8,17],[8,19],[8,21],

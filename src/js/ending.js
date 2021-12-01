@@ -2,18 +2,18 @@ import { opening, opening1, opening2, opening3, opening4, opening5 } from "./ope
 
 export function ending(state){
     const gameTitle = document.getElementById("game-title");
-
+    
     const crystal = document.getElementById("crystal");
     crystal.style.visibility = "hidden";
 
     
     if (state === 0){ //실패
-        const endingStr = ["모", "든 걸", " 삼", "켜버릴"];
+        const endingStr = ["든 걸", " 삼", "켜버릴"];
         let idx = 0;
-        let str = " ";
+        let str = "모";
         gameTitle.innerText = str;
         let makeTitle = setInterval(function(){
-            if (idx === 4){
+            if (idx === 3){
                 clearInterval(makeTitle);
             }
             else
@@ -30,12 +30,12 @@ export function ending(state){
         setTimeout(opening5, 3500);
     }
     else if (state === 1){ //성공
-        const winEnding = ["Mono", "chrome", " to", " colors"];
+        const winEnding = ["chrome", " to", " colors"];
         let winIdx = 0;
-        let str = " ";
+        let str = "Mono";
         gameTitle.innerText = str;
         let makeTitle = setInterval(function(){
-            if (winIdx === 4){
+            if (winIdx === 3){
                 clearInterval(makeTitle);
             }
             else

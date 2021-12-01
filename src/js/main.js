@@ -25,13 +25,10 @@ import { ending } from "./ending.js";
 //html 가져오기
 const gameTitle = document.getElementById("game-title");
 
-const clock = document.getElementById("timer");
-clock.innerText = "30.00";
 const crystal = document.getElementById("crystal");
 
 const gameBoard = document.getElementById("game-board");
 const arrowKeys = document.getElementById("arrow-keys");
-arrowKeys.style.visibility = "hidden";
 
 
 //게임 관련 변수
@@ -56,8 +53,6 @@ function game(){
         clearInterval(timerState);
         arrowKeys.style.visibility = "hidden";
         document.removeEventListener("keydown", keyEvent);
-        gameTitle.style.display = "block";
-        clock.style.display = "none";
         setTimeout(game, 5000);
     }
     else{   //시작
@@ -73,11 +68,9 @@ function gameStart(){
     userSetting();
     regenCrystal();
     drawField();
-    timerState = setTimer(gameState, timeLimit, clock);
+    timerState = setTimer(timeLimit, gameTitle);
     crystal.style.visibility = "visible"; 
     arrowKeys.style.visibility = "visible";
-    clock.style.display = "block";
-    gameTitle.style.display = "none";
 }
 
 function drawField(){
@@ -102,7 +95,7 @@ function drawField(){
             clearInterval(draw);
             resetField();
         }
-        else if (clock.innerText === "0.00"){
+        else if (gameTitle.innerText === "0.00"){
             game();
             ending(0);
         }
@@ -282,14 +275,12 @@ function regenCrystal(){
 function win(){
     gameState = false;
     clearInterval(timerState);
+    document.removeEventListener("keydown", keyEvent);
+    arrowKeys.style.visibility = "hidden";
     killAllsnake();
     resetBoard(board);
     resetField();
-    document.removeEventListener("keydown", keyEvent);
-    arrowKeys.style.visibility = "hidden";
     ending(1);
-    gameTitle.style.display = "block";
-    clock.style.display = "none";
     setTimeout(game,5000);
 }
 
@@ -305,7 +296,7 @@ function initialization(){
     timeLimit = 30;
     resetBoard(board);
     resetField();
-    setHTML(clock, timeLimit);
+    setHTML(gameTitle, timeLimit);
 }
 
 makeField(gameBoard);

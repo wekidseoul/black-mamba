@@ -1,14 +1,12 @@
 export function makeField(gameBoard){
     const table = document.createElement("table");
-    table.style.border = "solid";
-    table.style.color = "darkgray"
-    table.style.borderCollapse = "collapse";
     
     for (let i = 0; i<25; i++){
         const tr = document.createElement("tr");
         for (let j = 0; j<25; j++){
             const td = document.createElement("td");
             td.id = `${i},${j}`;
+            td.className = "piece";
             td.style.border = "solid";
             tr.appendChild(td);
         }
@@ -18,14 +16,10 @@ export function makeField(gameBoard){
     gameBoard.appendChild(table);
 }
 
-
-
 export function resetField(){
-    for (let i = 0; i<25; i++){
-        for (let j = 0; j<25; j++){
-            document.getElementById(`${i},${j}`).style.backgroundColor = "white";
-        }
-    }
+    document.querySelectorAll('.piece').forEach(p=>{
+        p.style.backgroundColor = "white";
+    })
 }
 
 export function setBoard(){
@@ -49,10 +43,8 @@ export function resetBoard(board){
     }
 }
 
-
-
-export function setHTML(clock, timeLimit){
-    clock.innerText = timeLimit.toFixed(2);
+export function setHTML(gameTitle, timeLimit){
+    gameTitle.innerText = timeLimit.toFixed(2);
     document.querySelectorAll('.colorTable').forEach(crystal => {
         crystal.style.backgroundColor = 'dimgray';
     })

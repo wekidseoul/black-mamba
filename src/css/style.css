@@ -22,11 +22,6 @@ header {
     font-size: 2rem;
 }
 
-.timer {
-    font-size: 2rem;
-    display: none;
-}
-
 main {
     display: flex;
     flex-direction: column;
@@ -52,6 +47,9 @@ main {
     margin: 0 auto;
     width: 90vw;
     height: 90vw;
+    border: solid;
+    color: darkgray;
+    border-collapse: collapse;
 }
 
 .arrowKeys {
@@ -62,6 +60,7 @@ main {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
+    visibility: hidden;
 }
 
 .arrowKey {
@@ -69,9 +68,6 @@ main {
     height: 50px;
 }
 
-#arrow1 {
-    
-}
 #arrow3 {
     position: absolute;
     top: 50%;
@@ -83,7 +79,4 @@ main {
     top: 50%;
     right: 50%;
     transform: translate(160%, -50%);
-}
-#arrow7 {
-    
 }
