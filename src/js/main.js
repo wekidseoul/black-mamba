@@ -323,7 +323,7 @@ rightBtn.addEventListener("click", keyEvent);
 
 document.addEventListener('dblclick', (e) => {
     e = e.originalEvent || e;
-    if(e.scale > 1){
+    if (e.scale > 1){
         e.preventDefault();
     }
 }, false);
