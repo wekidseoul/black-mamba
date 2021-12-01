@@ -80,3 +80,7 @@ main {
     right: 50%;
     transform: translate(160%, -50%);
 }
+
+#arrow7 {
+    margin-top: 10%;
+}
