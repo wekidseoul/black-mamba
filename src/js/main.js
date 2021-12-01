@@ -320,3 +320,7 @@ upBtn.addEventListener("click", keyEvent);
 downBtn.addEventListener("click", keyEvent);
 leftBtn.addEventListener("click", keyEvent);
 rightBtn.addEventListener("click", keyEvent);
+
+window.addEventListener('dblclick', (e) => {
+    e.preventDefault();
+});
