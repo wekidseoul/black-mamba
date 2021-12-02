@@ -327,3 +327,7 @@ document.addEventListener('dblclick', (e) => {
         e.preventDefault();
     }
 }, false);
+
+document.addEventListener("contextmenu", (e) => {
+    return false;
+})
