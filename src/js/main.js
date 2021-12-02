@@ -328,9 +328,9 @@ document.addEventListener('dblclick', (e) => {
     }
 }, false);
 
-document.addEventListener("contextmenu", (e) => {
-    return false;
-})
+// document.addEventListener("contextmenu", (e) => {
+//     return false;
+// })
 
 document.oncontextmenu = function(event) {
     event.preventDefault(); // 기본 태그 기능 막기
