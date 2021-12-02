@@ -58,10 +58,6 @@ main {
     border-collapse: collapse;
 }
 
-img {
-    pointer-events: none;
-}
-
 .arrowKeys {
     position: absolute;
     display: flex;
