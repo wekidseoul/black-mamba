@@ -245,6 +245,7 @@ function userSetting(){
 function keyEvent(e){
     let x = 0;
     let y = 0;
+
     if (e.key === "ArrowLeft" || e.target.id === "arrow3"){
         y -= 1;
     }else if (e.key === "ArrowRight" || e.target.id === "arrow5"){
@@ -278,7 +279,7 @@ function win(){
     gameState = false;
     clearInterval(timerState);
     timeLimit = gameTitle.innerText;
-    document.removeEventListener("keydown", keyEvent);
+    //document.removeEventListener("keydown", keyEvent);
     arrowKeys.style.visibility = "hidden";
     killAllsnake();
     resetBoard(board);
@@ -330,7 +331,6 @@ document.addEventListener('dblclick', (e) => {
         e.preventDefault();
     }
 }, false);
-
 
 document.oncontextmenu = function(event) {
     event.preventDefault();

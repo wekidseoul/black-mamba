@@ -34,7 +34,7 @@ export function ending(state, timeLimit){
         const winner = document.getElementById("winner");
         const clearTime = document.getElementById("clearTime");
 
-        const time = 30 - timeLimit;
+        const time = (30 - timeLimit) * 1000;
         clearTime.innerText = `score : ${time.toFixed(2)}`;
         let winIdx = 0;
         let str = "Mono";
@@ -63,7 +63,7 @@ export function ending(state, timeLimit){
         let fill = setInterval(function(){
             if (idx === 625){
                 clearInterval(fill);
-                winner.style.display = "block";   
+                winner.style.display = "block";
             }
             else{
                 const i = colors[idx][0];
