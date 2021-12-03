@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/79843611/142410272-77c16f05-d171-4e5f-a3f1-4a62cfb414fb.png)
+notion://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F6242d844-bc7f-4000-8799-e4dd7a898e5d%2Fexport_2.png?table=block&id=1756ad30-bff1-4d1f-b003-250eae80e022&spaceId=7d812c0b-5efe-4a14-80bb-1d541c573480&width=250&userId=d2fa2844-feff-4618-a734-a857e1401d4f&cache=v2
 # BLACK MAMBA
 
 - 목표
