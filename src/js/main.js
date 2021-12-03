@@ -29,7 +29,8 @@ const crystal = document.getElementById("crystal");
 
 const gameBoard = document.getElementById("game-board");
 const arrowKeys = document.getElementById("arrow-keys");
-
+const winner = document.getElementById("winner");
+const restart = document.getElementById("restart");
 
 //게임 관련 변수
 //변하는 값
@@ -68,9 +69,10 @@ function gameStart(){
     userSetting();
     regenCrystal();
     drawField();
-    timerState = setTimer(timeLimit, gameTitle);
     crystal.style.visibility = "visible"; 
     arrowKeys.style.visibility = "visible";
+    winner.style.display = "none";
+    timerState = setTimer(timeLimit, gameTitle);
 }
 
 function drawField(){
@@ -275,13 +277,13 @@ function regenCrystal(){
 function win(){
     gameState = false;
     clearInterval(timerState);
+    timeLimit = gameTitle.innerText;
     document.removeEventListener("keydown", keyEvent);
     arrowKeys.style.visibility = "hidden";
     killAllsnake();
     resetBoard(board);
     resetField();
-    ending(1);
-    setTimeout(game,5000);
+    ending(1, timeLimit);
 }
 
 
@@ -320,6 +322,7 @@ upBtn.addEventListener("click", keyEvent);
 downBtn.addEventListener("click", keyEvent);
 leftBtn.addEventListener("click", keyEvent);
 rightBtn.addEventListener("click", keyEvent);
+restart.addEventListener("click", game);
 
 document.addEventListener('dblclick', (e) => {
     e = e.originalEvent || e;
@@ -328,11 +331,8 @@ document.addEventListener('dblclick', (e) => {
     }
 }, false);
 
-// document.addEventListener("contextmenu", (e) => {
-//     return false;
-// })
 
 document.oncontextmenu = function(event) {
-    event.preventDefault(); // 기본 태그 기능 막기
+    event.preventDefault();
     return false;
 };

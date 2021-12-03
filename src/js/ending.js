@@ -1,6 +1,6 @@
-import { opening, opening1, opening2, opening3, opening4, opening5 } from "./opening.js";
+import { opening2, opening3, opening4, opening5 } from "./opening.js";
 
-export function ending(state){
+export function ending(state, timeLimit){
     const gameTitle = document.getElementById("game-title");
     
     const crystal = document.getElementById("crystal");
@@ -31,6 +31,11 @@ export function ending(state){
     }
     else if (state === 1){ //성공
         const winEnding = ["chrome", " to", " colors"];
+        const winner = document.getElementById("winner");
+        const clearTime = document.getElementById("clearTime");
+
+        const time = 30 - timeLimit;
+        clearTime.innerText = `score : ${time.toFixed(2)}`;
         let winIdx = 0;
         let str = "Mono";
         gameTitle.innerText = str;
@@ -58,6 +63,7 @@ export function ending(state){
         let fill = setInterval(function(){
             if (idx === 625){
                 clearInterval(fill);
+                winner.style.display = "block";   
             }
             else{
                 const i = colors[idx][0];
