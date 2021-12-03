@@ -257,6 +257,11 @@ function keyEvent(e){
     }
     userMove(x, y);
 }
+function winEvent(e){
+    if (e.key === "Enter"){
+        game();
+    }
+}
 
 function regenCrystal(){
     crystalIdx+=1;
@@ -279,7 +284,8 @@ function win(){
     gameState = false;
     clearInterval(timerState);
     timeLimit = gameTitle.innerText;
-    //document.removeEventListener("keydown", keyEvent);
+    document.removeEventListener("keydown", keyEvent);
+    document.addEventListener("keydown", winEvent);
     arrowKeys.style.visibility = "hidden";
     killAllsnake();
     resetBoard(board);

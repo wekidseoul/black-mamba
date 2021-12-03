@@ -34,8 +34,7 @@ export function ending(state, timeLimit){
         const winner = document.getElementById("winner");
         const clearTime = document.getElementById("clearTime");
 
-        const time = (30 - timeLimit) * 1000;
-        clearTime.innerText = `score : ${time.toFixed(2)}`;
+        clearTime.innerText = `score : ${timeLimit * 100}`;
         let winIdx = 0;
         let str = "Mono";
         gameTitle.innerText = str;
