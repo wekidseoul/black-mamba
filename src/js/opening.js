@@ -212,5 +212,5 @@ export function opening5(){
         else{
             clearInterval(write);
         }
-    }, 10);
+    }, 5);
 }

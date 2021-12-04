@@ -25,16 +25,16 @@ export function ending(state, timeLimit){
         }, 200)
 
         setTimeout(opening4, 500);
-        setTimeout(opening3, 1500);
-        setTimeout(opening2, 2500);
-        setTimeout(opening5, 3500);
+        setTimeout(opening3, 1000);
+        setTimeout(opening2, 1500);
+        setTimeout(opening5, 2000);
     }
     else if (state === 1){ //성공
         const winEnding = ["chrome", " to", " colors"];
         const winner = document.getElementById("winner");
         const clearTime = document.getElementById("clearTime");
 
-        clearTime.innerText = `score : ${timeLimit * 100}`;
+        clearTime.innerText = `score : ${parseInt(timeLimit * 100)}`;
         let winIdx = 0;
         let str = "Mono";
         gameTitle.innerText = str;

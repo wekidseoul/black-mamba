@@ -42,7 +42,7 @@ let timeLimit = 30;
 let gameState = false;
 let timerState = null;
 //고정된 값
-const crystalColor = ["red", "orange", "yellow", "green", "blue", "navy", "purple"];
+const crystalColor = ["red", "orange", "gold", "green", "blue", "navy", "purple"];
 const dx = [0, -1, 0, 1]
 const dy = [1, 0, -1, 0]
 
@@ -54,7 +54,7 @@ function game(){
         clearInterval(timerState);
         arrowKeys.style.visibility = "hidden";
         document.removeEventListener("keydown", keyEvent);
-        setTimeout(game, 5000);
+        setTimeout(game, 3000);
     }
     else{   //시작
         gameState = true;
