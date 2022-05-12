@@ -267,7 +267,7 @@ function keyEvent(e){
 
 function regenCrystal(){
     crystalIdx+=1;
-    if (crystalIdx === 1){
+    if (crystalIdx === 7){
         win();
         return;
     }
