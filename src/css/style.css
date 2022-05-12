@@ -110,12 +110,59 @@ main {
     bottom: 20px;
     transform: translateX(-50%);
     text-align: center;
+    margin-bottom: 20px;
 }
 
 #restart {
     color : white;
     background-color:unset;
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
 }
 #restart:hover {
     color : red;
+}
+
+#winner-name {
+    font-size: 18px;
+    padding: 4px 8px;
+    outline: none;
+    margin-top: 8px;
+    width: 130px;
+}
+#winner-submit {
+    padding: 4px 8px;
+    font-size: 18px;
+    color: #fff;
+    background-color: transparent;
+    border: 1px solid #fff;
+    outline: none;
+    margin: 4px;
+}
+#rank {
+    display: none;
+}
+#rank-board {
+    margin: 0 auto;
+    border: 2px solid #fff;
+    width: 60%;
+    padding: 20px 32px 12px;
+    height: 60vh;
+    overflow: scroll;
+    font-size: 20px;
+}
+#rank-board li {
+    margin-bottom: 12px;
+}
+.rank__index {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border: 1px solid #fff;
+    font-size: 18px;
+    margin-right: 4px;
 }

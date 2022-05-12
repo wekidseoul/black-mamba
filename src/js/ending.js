@@ -1,4 +1,6 @@
 import { opening2, opening3, opening4, opening5 } from "./opening.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+import {getFirestore, collection, query, orderBy, getDocs, addDoc} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js";
 
 export function ending(state, timeLimit){
     const gameTitle = document.getElementById("game-title");
@@ -63,6 +65,55 @@ export function ending(state, timeLimit){
             if (idx === 625){
                 clearInterval(fill);
                 winner.style.display = "block";
+
+                const nameInput = document.getElementById('winner-name')
+                const submitBtn = document.getElementById('winner-submit')
+                const rankContainer = document.getElementById('rank')
+                const rankBoard = document.getElementById('rank-board')
+                document.getElementById('clearTime').style.display = 'block'
+
+                nameInput.style.display = 'inline'
+                submitBtn.style.display = 'inline'
+
+                submitBtn.addEventListener('click', async () => {
+                    const name = nameInput.value;
+                    const score = parseInt(timeLimit * 100);
+
+                    const firebaseConfig = {
+                        apiKey: "AIzaSyAlmmpwGTbsTVgCfWOehOp0j_QM17BLH98",
+                        authDomain: "black-mamba-f01aa.firebaseapp.com",
+                        projectId: "black-mamba-f01aa",
+                        storageBucket: "black-mamba-f01aa.appspot.com",
+                        messagingSenderId: "888380763117",
+                        appId: "1:888380763117:web:94d2b9c505919cd43315e4"
+                    };
+                    
+                        const app = initializeApp(firebaseConfig);
+                        const db = getFirestore(app);
+                        const mambaCol = collection(db, 'black-mamba');
+
+                        await addDoc(collection(db, "black-mamba"), {
+                            name,
+                            score
+                          });
+
+                    nameInput.style.display = 'none'
+                    submitBtn.style.display = 'none'
+                    nameInput.value = '';
+                    document.getElementById('clearTime').style.display = 'none'
+
+                    document.getElementById('game-board').style.display = 'none';
+                    rankContainer.style.display = 'block';
+
+                    const q = await query(mambaCol, orderBy("score", "desc"));
+                    const mambaSnapshop = await getDocs(q);
+                    const rankList = mambaSnapshop.docs.map(doc => doc.data());
+
+                    const text = rankList.map((rank, idx) => `
+                    <li><span class="rank__index">${idx + 1}</span> ${rank.name}: ${rank.score}</li>
+                `)
+                    rankBoard.innerHTML = text.join('')
+                })
             }
             else{
                 const i = colors[idx][0];

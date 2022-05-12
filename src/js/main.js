@@ -48,6 +48,8 @@ const dy = [1, 0, -1, 0]
 
 //함수
 function game(){
+    document.getElementById('game-board').style.display = 'block';
+    document.getElementById('rank').style.display = 'none';
     initialization();
     if (gameState){ //종료
         gameState = false;
@@ -257,15 +259,15 @@ function keyEvent(e){
     }
     userMove(x, y);
 }
-function winEvent(e){
-    if (e.key === "Enter"){
-        game();
-    }
-}
+// function winEvent(e){
+//     if (e.key === "Enter"){
+//         game();
+//     }
+// }
 
 function regenCrystal(){
     crystalIdx+=1;
-    if (crystalIdx === 7){
+    if (crystalIdx === 1){
         win();
         return;
     }
@@ -285,7 +287,7 @@ function win(){
     clearInterval(timerState);
     timeLimit = gameTitle.innerText;
     document.removeEventListener("keydown", keyEvent);
-    document.addEventListener("keydown", winEvent);
+    // document.addEventListener("keydown", winEvent);
     arrowKeys.style.visibility = "hidden";
     killAllsnake();
     resetBoard(board);
