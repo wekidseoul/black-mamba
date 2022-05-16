@@ -76,6 +76,7 @@ export function ending(state, timeLimit){
                 submitBtn.style.display = 'inline'
 
                 submitBtn.addEventListener('click', async () => {
+                    submitBtn.disabled = true;
                     const name = nameInput.value;
                     const score = parseInt(timeLimit * 100);
 
@@ -113,6 +114,7 @@ export function ending(state, timeLimit){
                     <li><span class="rank__index">${idx + 1}</span> ${rank.name}: ${rank.score}</li>
                 `)
                     rankBoard.innerHTML = text.join('')
+                    submitBtn.disabled = false;
                 })
             }
             else{
